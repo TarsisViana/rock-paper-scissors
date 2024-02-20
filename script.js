@@ -1,12 +1,12 @@
 function getComputerChoice(){  // make a random choice generator that returns 1,2,3
   let randomChoice = Math.floor((Math.random()*3)+1)
   if (randomChoice ==1){       // assign 1=rock 2=paper 3=scissors 
-    return 'Rock';
+    return 'rock';
   } 
   else if (randomChoice == 2){
-    return 'Paper'
+    return 'paper'
   }
-  else return 'Scissors'
+  else return 'scissors'
 }
 
 
@@ -26,12 +26,12 @@ function getPlayerChoice(){  // funcion to ask and return the player choice
   return choice;
 }
 
-let roundPoints = 0;
 
 
 
-function oneRound(playerSelection,computerSelection){ // play one round and return who's
+function playOneRound(playerSelection,computerSelection){ // play one round and return
   if(playerSelection == computerSelection){           // the winner and why. Also added 
+    roundPoints = 2;
     return "It's a Tie!";                             // a variable to use later to add up
   }                                                   // the score. 
   else if(playerSelection == 'rock' && computerSelection == 'scissors') {
@@ -59,8 +59,42 @@ function oneRound(playerSelection,computerSelection){ // play one round and retu
     return 'You Lose! Rock beats Scissors.'
   }
 }  
+let roundPoints = 0;
 
+function playGame(){
 
+  let playerPoints = 0;
+  let compPoints = 0;
+  let roundNumber = 1;
 
+  for(let i = 0; i < 5; i++){
+    console.log('Round ' + roundNumber)
+    roundNumber++;
+    console.log(playOneRound(getPlayerChoice(),getComputerChoice()));
+    console.log(roundPoints);
+    if(roundPoints==1){
+      playerPoints++;
+    }
+    else if(roundPoints==0){
+      compPoints++;
+    }else{
+      i--;
+    }
+    console.log('Player: '+ playerPoints + ` | Computer: `+ compPoints);
+  } 
+
+  let finalScore = 'Final score: Player - ' + playerPoints + ' Computer - ' + compPoints;
+
+  if(playerPoints > compPoints){
+    console.log('You Won! Congratulations!');
+    console.log(finalScore);
+  }
+  else{
+    console.log('You Lost!');
+    console.log(finalScore);
+  }
+}
+
+playGame();
 
 

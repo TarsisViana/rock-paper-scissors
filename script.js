@@ -27,7 +27,7 @@ function getPlayerChoice(){  // funcion to ask and return the player choice
 }
 
 
-
+let roundPoints = 0;
 
 function playOneRound(playerSelection,computerSelection){ // play one round and return
   if(playerSelection == computerSelection){           // the winner and why. Also added 
@@ -62,52 +62,42 @@ function playOneRound(playerSelection,computerSelection){ // play one round and 
     return 'error';
   }
 }  
-let roundPoints = 0;
-
-function playGame(){
-
-  let playerPoints = 0;
-  let compPoints = 0;
-  let roundNumber = 1;
-
-  for(let i = 0; i < 5; i++){
-    console.log('Round ' + roundNumber)
-    roundNumber++;
-    console.log(playOneRound(getPlayerChoice(),getComputerChoice()));
-  
-    if(roundPoints==1){
-      playerPoints++;
-    }
-    else if(roundPoints==0){
-      compPoints++;
-    }else{
-      i--;
-    }
-    console.log('Player: '+ playerPoints + ` | Computer: `+ compPoints);
-  } 
-
-  let finalScore = 'Final score: Player - ' + playerPoints + ' Computer - ' + compPoints;
-
-  if(playerPoints > compPoints){
-    console.log('You Won! Congratulations!');
-    console.log(finalScore);
-  }
-  else{
-    console.log('You Lost!');
-    console.log(finalScore);
-  }
-}
 
 
 
 const buttons = document.querySelectorAll('button');
 const results = document.querySelector('#results');
+const roundCounter = document.querySelector('h2');
+const score = document.querySelector('#score');
+const end = document.querySelector('#end');
+
+let playerPoints = 0;
+let compPoints = 0;
+let roundNumber = 1;
 
 buttons.forEach((button) =>{
   button.addEventListener('click', function(e) {
-    let temp = playOneRound(e.target.id,getComputerChoice());
-    results.textContent = temp;
-    console.log(temp);  
+    if(playerPoints < 5 && compPoints < 5){
+      roundCounter.textContent = 'Round ' + roundNumber;
+      results.textContent = playOneRound(e.target.id,getComputerChoice());
+      if(roundPoints==1){
+        playerPoints++;
+      }
+      else if(roundPoints==0){
+        compPoints++;
+      }
+      score.textContent = 'Player: '+ playerPoints + ' | Computer: ' + compPoints;
+
+      roundNumber++;
+    }
+    else if(playerPoints == 5){
+      end.textContent = 'Congratulations, You won!';
+
+    }
+    else if(compPoints == 5){
+      end.textContent = 'You lost!';
+
+    }
   })
 })
 

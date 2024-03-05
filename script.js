@@ -10,23 +10,6 @@ function getComputerChoice(){  // make a random choice generator that returns 1,
 }
 
 
-function getPlayerChoice(){  // funcion to ask and return the player choice
-  let choice = '';
-  let check = false;
-  while(!check){ // Loop to ensure that the player selects a valid option, if not asks for another try.
-
-    choice = (prompt('Make your choice, type: Rock, Paper or Scissors')).toLowerCase();
-    if( choice == 'rock' || choice == 'paper' || choice == 'scissors') {
-      check = true;
-    } 
-    else {
-      alert('Invalid choice, please try again.');
-    }
-  }  
-  return choice;
-}
-
-
 let roundPoints = 0;
 
 function playOneRound(playerSelection,computerSelection){ // play one round and return
@@ -90,15 +73,15 @@ buttons.forEach((button) =>{
 
       roundNumber++;
     }
-    else if(playerPoints == 5){
+
+    if(playerPoints == 5){
       end.textContent = 'Congratulations, You won!';
-
     }
-    else if(compPoints == 5){
+
+    if(compPoints == 5){
       end.textContent = 'You lost!';
-
     }
+   
   })
 })
-
 

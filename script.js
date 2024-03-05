@@ -54,9 +54,12 @@ function playOneRound(playerSelection,computerSelection){ // play one round and 
     roundPoints = 0;
     return 'You Lose! Scissors beats Paper.'
   }
-  else {
+  else if (playerSelection == 'scissors' && computerSelection == 'rock'){
     roundPoints = 0;
     return 'You Lose! Rock beats Scissors.'
+  }
+  else {
+    return 'error';
   }
 }  
 let roundPoints = 0;
@@ -95,6 +98,17 @@ function playGame(){
   }
 }
 
-playGame();
+
+
+const buttons = document.querySelectorAll('button');
+const results = document.querySelector('#results');
+
+buttons.forEach((button) =>{
+  button.addEventListener('click', function(e) {
+    let temp = playOneRound(e.target.id,getComputerChoice());
+    results.textContent = temp;
+    console.log(temp);  
+  })
+})
 
 

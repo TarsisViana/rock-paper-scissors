@@ -71,7 +71,7 @@ function playGame(){
     console.log('Round ' + roundNumber)
     roundNumber++;
     console.log(playOneRound(getPlayerChoice(),getComputerChoice()));
-    console.log(roundPoints);
+  
     if(roundPoints==1){
       playerPoints++;
     }
